@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/ui/PageHero';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { SectorsShowcase } from '@/components/sectors/SectorsShowcase';
+import { SectorsIndex } from '@/components/sectors/SectorsIndex';
 import { FootprintStory } from '@/components/sectors/FootprintStory';
 import { CTABand } from '@/components/ui/CTABand';
 
@@ -22,7 +22,7 @@ export default function SectorsPage() {
       />
 
       <Section tone="ink" density="normal" overlap>
-        <SectorsShowcase />
+        <SectorsIndex />
       </Section>
 
       <Section tone="ink" density="tight">
