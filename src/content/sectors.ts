@@ -182,3 +182,40 @@ export const sectors: Sector[] = [
 
 export const getSector = (slug: string) =>
   sectors.find((s) => s.slug === slug);
+
+// Representative imagery per sector (architectural / logistics / agriculture /
+// energy / shipping mood). Used by the editorial sector index.
+export const sectorImage: Record<string, { src: string; alt: string }> = {
+  'trading-commodities': {
+    src: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Container logistics yard at a major port at dusk',
+  },
+  'food-agriculture': {
+    src: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Aerial view of cultivated agricultural fields',
+  },
+  'real-estate-infrastructure': {
+    src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Modern high-rise architecture against the sky',
+  },
+  'telecom-energy': {
+    src: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Rows of solar panels under a clear sky',
+  },
+  'agricultural-trading': {
+    src: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Cultivated farmland viewed from above',
+  },
+  'general-trading-distribution': {
+    src: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Distribution and logistics port operation',
+  },
+  'fishing-aquaculture': {
+    src: 'https://images.unsplash.com/photo-1504672281656-e4981d70414b?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Fishing vessels moored at a coastal harbour',
+  },
+  'mining-cement': {
+    src: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?auto=format&fit=crop&w=1400&q=70',
+    alt: 'Heavy industrial structure against a dusk sky',
+  },
+};

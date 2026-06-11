@@ -6,7 +6,7 @@ import { MaskReveal } from '@/components/ui/MaskReveal';
 import { Marquee } from '@/components/ui/Marquee';
 import { Parallax } from '@/components/ui/Parallax';
 import { AnimatedReveal } from '@/components/ui/AnimatedReveal';
-import { SectorsShowcase } from '@/components/sectors/SectorsShowcase';
+import { SectorsIndex } from '@/components/sectors/SectorsIndex';
 import { StatStrip } from '@/components/home/StatStrip';
 import { FeaturedProjects } from '@/components/home/FeaturedProjects';
 import { FootprintStory } from '@/components/sectors/FootprintStory';
@@ -104,7 +104,7 @@ export default function HomePage() {
             All sectors
           </Button>
         </div>
-        <SectorsShowcase />
+        <SectorsIndex />
       </Section>
 
       {/* ── Featured projects — editorial feature + rows ── */}
