@@ -78,7 +78,12 @@ export default function InsightsPage() {
         {/* Rest grid */}
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {rest.map((a, i) => (
-            <AnimatedReveal as="article" key={a.slug} delay={i * 0.05}>
+            <AnimatedReveal
+              as="article"
+              key={a.slug}
+              delay={i * 0.05}
+              className={i === 1 ? 'lg:mt-10' : ''}
+            >
               <Link
                 href={`/insights/${a.slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded-3xl border border-sand/10 bg-charcoal/50 transition-colors hover:border-accent/40"

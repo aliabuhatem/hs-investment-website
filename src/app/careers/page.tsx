@@ -23,39 +23,48 @@ export default function CareersPage() {
         intro={culture.body}
       />
 
-      {/* Culture pillars */}
-      <Section tone="ink">
-        <SectionHeading
-          eyebrow="Work Culture"
-          title="What it means to build with us"
-          className="mb-12"
-        />
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {culture.pillars.map((p, i) => (
-            <AnimatedReveal
-              as="li"
-              key={p.title}
-              delay={i * 0.05}
-              className="rounded-3xl border border-sand/10 bg-charcoal/50 p-7"
-            >
-              <span className="tnum font-display text-3xl font-semibold text-accent">
-                0{i + 1}
-              </span>
-              <h3 className="mt-4 font-display text-base font-semibold text-sand">
-                {p.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-sand-400">
-                {p.body}
-              </p>
-            </AnimatedReveal>
-          ))}
-        </ul>
+      {/* Culture pillars — asymmetric split, staggered offset rows */}
+      <Section tone="ink" density="open" overlap>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading
+            eyebrow="Work Culture"
+            index="01"
+            title="What it means to build with us"
+          />
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {culture.pillars.map((p, i) => (
+              <AnimatedReveal
+                as="li"
+                key={p.title}
+                delay={i * 0.05}
+                className={`group relative overflow-hidden rounded-3xl border border-sand/10 bg-charcoal/40 p-7 transition-colors hover:border-accent/40 ${
+                  i % 2 === 1 ? 'sm:mt-10' : ''
+                }`}
+              >
+                <span className="tnum font-display text-3xl font-semibold text-accent">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-4 font-display text-base font-semibold text-sand">
+                  {p.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-sand-400">
+                  {p.body}
+                </p>
+                <span
+                  aria-hidden
+                  className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out-soft group-hover:w-full"
+                />
+              </AnimatedReveal>
+            ))}
+          </ul>
+        </div>
       </Section>
 
       {/* Open positions */}
-      <Section tone="black">
+      <Section tone="black" density="normal">
         <SectionHeading
           eyebrow="Open Positions"
+          index="02"
           title="Where you fit in"
           className="mb-12"
         />
@@ -92,10 +101,11 @@ export default function CareersPage() {
       </Section>
 
       {/* Application form */}
-      <Section tone="ink" id="apply">
+      <Section tone="ink" id="apply" density="open">
         <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="Apply"
+            index="03"
             title="Tell us about yourself"
             intro="Share your details and the role you're interested in. We review every application."
           />

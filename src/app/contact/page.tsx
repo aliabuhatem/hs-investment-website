@@ -55,6 +55,7 @@ export default function ContactPage() {
           <div>
             <SectionHeading
               eyebrow="Send a Message"
+              index="01"
               title="We'd love to hear from you"
               className="mb-8"
             />
@@ -99,19 +100,23 @@ export default function ContactPage() {
         </div>
       </Section>
 
-      {/* All offices */}
-      <Section tone="black">
+      {/* All offices — staggered offset rows */}
+      <Section tone="black" density="normal">
         <SectionHeading
           eyebrow="Global Offices"
+          index="02"
           title="Where to find us"
           className="mb-12"
         />
         <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {offices.map((o) => (
+          {offices.map((o, i) => (
             <AnimatedReveal
               as="li"
               key={o.country}
-              className="rounded-3xl border border-sand/10 bg-ink p-7"
+              delay={i * 0.04}
+              className={`group relative overflow-hidden rounded-3xl border border-sand/10 bg-charcoal/30 p-7 transition-colors hover:border-accent/40 ${
+                i % 3 === 1 ? 'lg:mt-8' : i % 3 === 2 ? 'lg:mt-16' : ''
+              }`}
             >
               <div className="flex items-center gap-2">
                 <h3 className="font-display text-lg font-semibold text-sand">
@@ -131,6 +136,10 @@ export default function ContactPage() {
                   <Phone size={15} aria-hidden /> {o.tel}
                 </a>
               )}
+              <span
+                aria-hidden
+                className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out-soft group-hover:w-full"
+              />
             </AnimatedReveal>
           ))}
         </ul>

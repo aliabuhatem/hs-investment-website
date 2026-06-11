@@ -4,18 +4,12 @@ import { PageHero } from '@/components/ui/PageHero';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { AnimatedReveal } from '@/components/ui/AnimatedReveal';
-import { KPICounter } from '@/components/ui/KPICounter';
+import { StatStrip } from '@/components/home/StatStrip';
 import { ProjectCard } from '@/components/projects/ProjectCard';
 import { Button } from '@/components/ui/Button';
 import { Icon } from '@/components/ui/Icon';
 import { CTABand } from '@/components/ui/CTABand';
-import {
-  whyInvest,
-  investmentModels,
-  partnerships,
-  esg,
-  kpis,
-} from '@/content/site';
+import { whyInvest, investmentModels, partnerships, esg } from '@/content/site';
 import { projects, SAMPLE_NOTICE } from '@/content/projects';
 
 export const metadata: Metadata = {
@@ -26,6 +20,7 @@ export const metadata: Metadata = {
 
 export default function InvestorsPage() {
   const caseStudies = projects.filter((p) => p.status === 'Completed').slice(0, 3);
+  const [leadModel, ...otherModels] = investmentModels;
 
   return (
     <>
@@ -48,11 +43,17 @@ export default function InvestorsPage() {
         </div>
       </PageHero>
 
-      {/* Why invest */}
-      <Section tone="ink">
-        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
+      {/* Track record — asymmetric stat band */}
+      <Section tone="ink" density="normal" overlap>
+        <StatStrip />
+      </Section>
+
+      {/* Why invest — asymmetric split, staggered list */}
+      <Section tone="ink" density="open">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <SectionHeading
             eyebrow="Why HS Investment Group"
+            index="01"
             title="Six reasons partners invest with us"
           />
           <ul className="grid gap-4 sm:grid-cols-2">
@@ -61,78 +62,110 @@ export default function InvestorsPage() {
                 as="li"
                 key={w}
                 delay={i * 0.04}
-                className="flex gap-3 rounded-2xl border border-sand/10 bg-charcoal/40 p-5"
+                className={`group relative flex gap-3 overflow-hidden rounded-2xl border border-sand/10 bg-charcoal/40 p-5 transition-colors hover:border-accent/40 ${
+                  i % 2 === 1 ? 'sm:mt-8' : ''
+                }`}
               >
-                <Check size={18} className="mt-0.5 shrink-0 text-accent" aria-hidden />
+                <span className="tnum font-display text-sm text-accent">
+                  0{i + 1}
+                </span>
                 <span className="text-sm leading-relaxed text-sand-200">{w}</span>
+                <span
+                  aria-hidden
+                  className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out-soft group-hover:w-full"
+                />
               </AnimatedReveal>
             ))}
           </ul>
         </div>
       </Section>
 
-      {/* Track record */}
-      <Section tone="black" className="!py-16">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-          {kpis.map((k) => (
-            <AnimatedReveal key={k.label}>
-              <KPICounter value={k.value} suffix={k.suffix} label={k.label} />
-            </AnimatedReveal>
-          ))}
-        </div>
-      </Section>
-
-      {/* Investment models */}
-      <Section tone="ink">
+      {/* Investment models — one feature + stacked supporting */}
+      <Section tone="ink" density="normal" containerClassName="relative">
+        <span
+          aria-hidden
+          className="ghost-num pointer-events-none absolute -top-16 right-0 hidden font-display text-[14rem] font-bold lg:block"
+        >
+          02
+        </span>
         <SectionHeading
           eyebrow="Investment Model"
+          index="02"
           title="Flexible structures, aligned interests"
           intro="We partner through joint ventures, direct equity and public-private partnerships — always with active ownership."
           className="mb-12"
         />
-        <div className="grid gap-4 lg:grid-cols-3">
-          {investmentModels.map((m, i) => (
-            <AnimatedReveal
-              key={m.title}
-              delay={i * 0.05}
-              className="rounded-3xl border border-sand/10 bg-charcoal/50 p-8"
-            >
-              <span className="tnum font-display text-3xl font-semibold text-accent">
-                0{i + 1}
-              </span>
-              <h3 className="mt-4 font-display text-xl font-semibold text-sand">
-                {m.title}
+        <div className="grid gap-5 lg:grid-cols-12">
+          <AnimatedReveal
+            x={-20}
+            className="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-accent/25 bg-accent/[0.06] p-8 lg:col-span-5 lg:min-h-[340px]"
+          >
+            <span className="tnum font-display text-5xl font-semibold text-accent">
+              01
+            </span>
+            <div className="mt-8">
+              <h3 className="font-display text-2xl font-semibold text-sand">
+                {leadModel.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-sand-400">
-                {m.body}
+              <p className="mt-3 max-w-sm leading-relaxed text-sand-300">
+                {leadModel.body}
               </p>
-            </AnimatedReveal>
-          ))}
+            </div>
+          </AnimatedReveal>
+          <div className="flex flex-col gap-5 lg:col-span-7">
+            {otherModels.map((m, i) => (
+              <AnimatedReveal
+                key={m.title}
+                delay={i * 0.06}
+                className="group relative flex flex-1 items-start gap-6 overflow-hidden rounded-3xl border border-sand/10 bg-charcoal/40 p-7 transition-colors hover:border-accent/40"
+              >
+                <span className="tnum font-display text-4xl font-semibold text-sand-400/60">
+                  0{i + 2}
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold text-sand">
+                    {m.title}
+                  </h3>
+                  <p className="mt-2 leading-relaxed text-sand-400">{m.body}</p>
+                </div>
+                <span
+                  aria-hidden
+                  className="absolute bottom-0 left-0 h-[2px] w-0 bg-accent transition-all duration-300 ease-out-soft group-hover:w-full"
+                />
+              </AnimatedReveal>
+            ))}
+          </div>
         </div>
       </Section>
 
       {/* Case studies */}
-      <Section tone="black">
+      <Section tone="ink" density="normal">
         <SectionHeading
           eyebrow="Track Record & Case Studies"
+          index="03"
           title="Proven delivery across sectors"
           intro={SAMPLE_NOTICE}
           className="mb-12"
         />
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {caseStudies.map((p) => (
-            <AnimatedReveal key={p.id}>
+          {caseStudies.map((p, i) => (
+            <AnimatedReveal
+              key={p.id}
+              delay={i * 0.05}
+              className={i === 1 ? 'lg:mt-10' : ''}
+            >
               <ProjectCard project={p} />
             </AnimatedReveal>
           ))}
         </div>
       </Section>
 
-      {/* ESG */}
-      <Section tone="ink">
+      {/* ESG — asymmetric split, offset list */}
+      <Section tone="ink" density="open">
         <div className="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <SectionHeading
             eyebrow="ESG & Sustainability"
+            index="04"
             title="Responsible investment, by design"
             intro="Sustainability is embedded across our value chains — from sourcing to energy and connectivity."
           />
@@ -142,7 +175,9 @@ export default function InvestorsPage() {
                 as="li"
                 key={e.title}
                 delay={i * 0.04}
-                className="rounded-2xl border border-sand/10 bg-charcoal/40 p-6"
+                className={`group relative overflow-hidden rounded-2xl border border-sand/10 bg-charcoal/40 p-6 transition-colors hover:border-accent/40 ${
+                  i % 2 === 1 ? 'sm:mt-8' : ''
+                }`}
               >
                 <Leaf size={22} className="text-accent" aria-hidden />
                 <h3 className="mt-4 font-display text-base font-semibold text-sand">
@@ -157,10 +192,11 @@ export default function InvestorsPage() {
         </div>
       </Section>
 
-      {/* Partnerships */}
-      <Section tone="black">
+      {/* Partnerships — staggered */}
+      <Section tone="ink" density="tight">
         <SectionHeading
           eyebrow="Partnerships & Opportunities"
+          index="05"
           title="Who we partner with"
           intro={partnerships.intro}
           className="mb-12"
@@ -169,10 +205,12 @@ export default function InvestorsPage() {
           {partnerships.partners.map((p, i) => (
             <AnimatedReveal
               key={p}
-              delay={i * 0.05}
-              className="flex items-center gap-4 rounded-2xl border border-sand/10 bg-ink p-6"
+              delay={i * 0.06}
+              className={`group flex items-center gap-4 rounded-2xl border border-sand/10 bg-charcoal/30 p-6 transition-colors hover:border-accent/40 ${
+                i === 1 ? 'sm:mt-8' : ''
+              }`}
             >
-              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-charcoal text-accent">
+              <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-accent transition-transform duration-200 group-hover:scale-110">
                 <Icon name={['Handshake', 'Globe2', 'Network'][i]} size={22} />
               </span>
               <span className="text-sm font-medium text-sand">{p}</span>

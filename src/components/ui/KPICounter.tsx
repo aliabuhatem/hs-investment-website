@@ -11,6 +11,7 @@ type Props = {
   label: string;
   decimals?: number;
   light?: boolean;
+  size?: 'md' | 'lg';
 };
 
 // Animated count-up triggered on scroll into view. Uses tabular figures.
@@ -21,6 +22,7 @@ export function KPICounter({
   label,
   decimals = 0,
   light = false,
+  size = 'md',
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15%' });
@@ -55,9 +57,11 @@ export function KPICounter({
   return (
     <div ref={ref} className="flex flex-col">
       <span
-        className={`tnum font-display text-5xl font-semibold leading-none tracking-tight sm:text-6xl ${
-          light ? 'text-ink' : 'text-sand'
-        }`}
+        className={`tnum font-display font-semibold leading-none tracking-tight ${
+          size === 'lg'
+            ? 'text-6xl sm:text-7xl lg:text-8xl'
+            : 'text-5xl sm:text-6xl'
+        } ${light ? 'text-ink' : 'text-sand'}`}
       >
         {prefix}
         <span className="text-accent">{formatted}</span>
