@@ -62,6 +62,10 @@ const config: Config = {
           '0%, 100%': { opacity: '0.6' },
           '50%': { opacity: '1' },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         'fade-up': 'fade-up 0.4s cubic-bezier(0.16,1,0.3,1) both',

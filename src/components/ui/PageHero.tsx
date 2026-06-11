@@ -17,7 +17,7 @@ export function PageHero({ eyebrow, title, intro, children }: Props) {
   const reduced = usePrefersReducedMotion();
 
   return (
-    <header className="relative overflow-hidden border-b border-sand/10 bg-ink pb-16 pt-36 sm:pt-40 lg:pb-20">
+    <header className="relative overflow-hidden pb-16 pt-36 sm:pt-40 lg:pb-24">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

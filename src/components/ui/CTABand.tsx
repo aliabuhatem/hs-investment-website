@@ -15,7 +15,7 @@ type Props = {
 
 export function CTABand({ eyebrow, title, body, primary, secondary }: Props) {
   return (
-    <section className="relative overflow-hidden bg-black py-24 sm:py-28">
+    <section className="relative overflow-hidden py-24 sm:py-32">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"

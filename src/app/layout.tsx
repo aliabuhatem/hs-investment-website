@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ScrollProgress } from '@/components/layout/ScrollProgress';
 import { SmoothScroll } from '@/components/layout/SmoothScroll';
 import { PageTransition } from '@/components/layout/PageTransition';
+import { SiteBackground } from '@/components/layout/SiteBackground';
 
 const display = Space_Grotesk({
   subsets: ['latin'],
@@ -78,6 +79,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <SiteBackground />
         <SmoothScroll>
           <ScrollProgress />
           <Nav />

@@ -10,19 +10,24 @@ type Props = {
   className?: string;
   delay?: number;
   y?: number;
-  as?: 'div' | 'section' | 'li' | 'article' | 'span';
+  x?: number;
+  scaleFrom?: number;
+  as?: 'div' | 'section' | 'li' | 'article' | 'span' | 'p';
   once?: boolean;
 };
 
 /**
- * Scroll-into-view reveal. Animates transform/opacity only. Honors
- * reduced-motion by rendering content immediately with no transform.
+ * Scroll-into-view reveal with the house easing — directional movement plus a
+ * slight scale clearing (never plain opacity). Honors reduced-motion by
+ * rendering content immediately with no transform.
  */
 export function AnimatedReveal({
   children,
   className,
   delay = 0,
-  y = 18,
+  y = 28,
+  x = 0,
+  scaleFrom = 0.985,
   as = 'div',
   once = true,
 }: Props) {
@@ -31,11 +36,18 @@ export function AnimatedReveal({
   const reduced = usePrefersReducedMotion();
 
   const variants: Variants = {
-    hidden: { opacity: 0, y: reduced ? 0 : y },
+    hidden: {
+      opacity: 0,
+      y: reduced ? 0 : y,
+      x: reduced ? 0 : x,
+      scale: reduced ? 1 : scaleFrom,
+    },
     show: {
       opacity: 1,
       y: 0,
-      transition: { duration: duration.base, ease: ease.out, delay },
+      x: 0,
+      scale: 1,
+      transition: { duration: duration.slow, ease: ease.signature, delay },
     },
   };
 

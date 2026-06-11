@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { PageHero } from '@/components/ui/PageHero';
 import { Section } from '@/components/ui/Section';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { SectorsBento } from '@/components/sectors/SectorsBento';
-import { FootprintMap } from '@/components/sectors/FootprintMap';
+import { SectorsShowcase } from '@/components/sectors/SectorsShowcase';
+import { FootprintStory } from '@/components/sectors/FootprintStory';
 import { CTABand } from '@/components/ui/CTABand';
 
 export const metadata: Metadata = {
@@ -21,18 +21,20 @@ export default function SectorsPage() {
         intro="From global sourcing to regional delivery — HS Investment Group operates across the sectors that underpin trade, food security, infrastructure, connectivity and energy."
       />
 
-      <Section tone="ink">
-        <SectorsBento />
+      <Section tone="ink" density="normal" overlap>
+        <SectorsShowcase />
       </Section>
 
-      <Section tone="black">
-        <SectionHeading
-          eyebrow="Geographic Footprint"
-          title="Connecting sourcing, processing & markets"
-          intro="Hover or tap a location to see its role in the value chain — governed and financed through the UAE."
-          className="mb-12"
-        />
-        <FootprintMap />
+      <Section tone="ink" density="tight">
+        <div className="mb-4 max-w-2xl">
+          <SectionHeading
+            eyebrow="Geographic Footprint"
+            index="06"
+            title="Connecting sourcing, processing & markets"
+            intro="Scroll to trace the value chain — governed and financed through the UAE."
+          />
+        </div>
+        <FootprintStory />
       </Section>
 
       <CTABand
