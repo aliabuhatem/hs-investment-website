@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #15222b;
+  --charcoal: #2b2c2c;
+  --black: #0a0a0a;
+  --sand: #dcd5cd;
+  --accent: #ed5225;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-ink text-sand font-sans;
+    font-feature-settings: 'ss01';
+    overflow-x: hidden;
+  }
+
+  /* Tabular figures for all numeric data (KPIs, ROI %, sizes). */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  /* Visible, brand-coloured focus ring for full keyboard nav. */
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  /* Spaced uppercase brand heading helper. */
+  .brand-track {
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(21, 34, 43, 0.55);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+  }
+  .glass-sand {
+    background: rgba(220, 213, 205, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .container-7xl {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10;
+  }
+  .hairline {
+    border-color: rgba(220, 213, 205, 0.12);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  /* Touch comfort on interactive elements. */
+  .tap {
+    touch-action: manipulation;
+  }
+}
+
+/* Thin custom scrollbar to match the architectural mood. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--charcoal);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3b3b;
+}
+
+/* Global reduced-motion guard — kill non-essential animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
